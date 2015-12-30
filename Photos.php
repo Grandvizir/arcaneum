@@ -3,7 +3,7 @@
 <?php 
 	if ($_GET['parameter'] == 'Admin')
 	{
-		header('Location: Admin2.php');
+		include('Admin2.php');
 	} else {
 		try
 		{

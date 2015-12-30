@@ -6,11 +6,8 @@ require "dao/mysqldao.php";
 
 
 $dao = new MySqlDaoFactory();
-
 $jourdao = $dao->jourBddDao();
-echo "plop";
 $winners = $jourdao->lastWinner( 3 );
-echo "plip";
 
 
 
