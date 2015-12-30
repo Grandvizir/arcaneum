@@ -15,15 +15,11 @@
 		<![endif]-->
 	</head>
 	<body>
-
-		<?php include("Menu.php");?>
-
-		<div id="bloc_page">
 			<?php if (!isset($_POST['password']) OR $_POST['password'] != "Arcaneum")
 			{
 				 
 				
-				?><div id="bloc_page">'
+				?><div id="bloc_page">
 					<form method="post" action="Admin2.php">
 						<label for="password"> Password : </label> <input type="password" name="password" id="password" />
 						<input type="submit" value="validez" />
@@ -33,21 +29,21 @@
 			}
 			else
 			{
-				echo "plop";
 				try
 				{
-					echo "plop";
-					$bdd = new PDO('mysql:host=localhost;dbname=arcaneum;charset=utf8', 'grandvizir', 'plop', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+					$bdd = new PDO('mysql:host=localhost;dbname=arcaneum;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 				}
 				catch (Exception $e)
 				{
 					die('Erreur : ' . $e->getMessage());
 				}
 				
+				include('menu.php');
 				$reponse2 = $bdd->query('SELECT MAX(ID) AS id_max FROM imagebdd');
 				$max = $reponse2->fetch();
 				$max['id_max'] = $max['id_max']+1;
 				$reponse = $bdd->query('SELECT * FROM imagebdd');
+				echo '<div id="bloc_page">';
 				echo '<div class="Photos">';
 				while($donnees = $reponse->fetch())
 				{
@@ -56,10 +52,8 @@
 				}
 					echo '<a href="Admin3.php?img=' . $max['id_max'] . '" >  Insérer une nouvelle image ? </a>';
 				echo '</div>';
-			
-				/*	AJOUTER L4INSERTION		*/
-				
+				echo '</div>';
+							
 			}
 		?>
-		</div>
-	</body>
+</body>

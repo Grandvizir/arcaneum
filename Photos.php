@@ -3,22 +3,18 @@
 <?php 
 	if ($_GET['parameter'] == 'Admin')
 	{
-		header('Location: Admin2.php');
+		include('Admin2.php');
 	} else {
-		try
+
+		require 'dao/mysqldao.php';
+
+		$dao = new MySqlDaoFactory();
+		$imagedao = $dao->imageBddDao();
+		$all = $imagedao->AllImages();
+
+		foreach ($all as $link)
 		{
-			$bdd = new PDO('mysql:host=localhost;dbname=arcaneum;charset=utf8', 'grandvizir', 'plop', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-		}
-		catch (Exception $e)
-		{
-			die('Erreur : ' . $e->getMessage());
-		}
-			
-		$reponse = $bdd->query('SELECT * FROM imagebdd');
-		
-		while($donnees = $reponse->fetch())
-		{
-			echo '<img src="' . $donnees['Img'] . '" alt="Photo" title="Voir taille originale" class="miniature"/>';
+			echo '<img src="' . $link->getImage() . '" alt="Photo" title="Voir taille originale" class="miniature"/>';
 		}
 	}
 ?>
