@@ -27,7 +27,7 @@ class MySqlDaoFactory
 
 
         return $bdd;
-    }
+    }   
 
     public function jourBddDao(){
         return new JourBddDAO( $this );

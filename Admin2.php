@@ -29,28 +29,25 @@
 			}
 			else
 			{
-				try
-				{
-					$bdd = new PDO('mysql:host=localhost;dbname=arcaneum;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-				}
-				catch (Exception $e)
-				{
-					die('Erreur : ' . $e->getMessage());
-				}
+				require "dao/mysqldao.php";
+
+				$dao = new MySqlDaoFactory();
+				$imagedao = $dao->imageBddDao();
+				$max = $imagedao->MaxID();
 				
 				include('menu.php');
-				$reponse2 = $bdd->query('SELECT MAX(ID) AS id_max FROM imagebdd');
-				$max = $reponse2->fetch();
-				$max['id_max'] = $max['id_max']+1;
-				$reponse = $bdd->query('SELECT * FROM imagebdd');
+
+				$max = $max+1;
+
+				$reponse = $imagedao->AllImages();
 				echo '<div id="bloc_page">';
 				echo '<div class="Photos">';
-				while($donnees = $reponse->fetch())
+				foreach ($reponse as $donnees)
 				{
-					echo '<a href="Admin3.php?img=' . $donnees['ID'] . '" >
-						<img src="' . $donnees['Img'] . '" alt="Photo" title="Modifier" class="miniature"/></a>';
+					echo '<a href="Admin3.php?img=' . $donnees->getID() . '" >
+						<img src="' . $donnees->getImage() . '" alt="Photo" title="Modifier" class="miniature"/></a>';
 				}
-					echo '<a href="Admin3.php?img=' . $max['id_max'] . '" >  Insérer une nouvelle image ? </a>';
+					echo '<a href="Admin3.php?img=' . $max . '" >  Insérer une nouvelle image ? </a>';
 				echo '</div>';
 				echo '</div>';
 							

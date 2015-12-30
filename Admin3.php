@@ -17,34 +17,35 @@
 	<body>
 		
 	<?php include("Menu.php");
-		try
-		{
-			$bdd = new PDO('mysql:host=localhost;dbname=arcaneum;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-		}
-		catch (Exception $e)
-		{
-			die('Erreur : ' . $e->getMessage());
-		}
-		
-		$tempo2 = $_GET['img'];
-		$req = $bdd->prepare('SELECT ID, COUNT(DISTINCT ID) AS test FROM imagebdd WHERE ID = ?');
-		$req->execute(array($tempo2));
-		$tempo = $req->fetch();
+
+		require "dao/mysqldao.php";
+
+		$dao = new MySqlDaoFactory();
+		$imagedao = $dao->imageBddDao();
+
+		$tempo = $imagedao->VerifID($_GET['img']);
 		
 		if ($tempo['test']=='1')
-		{			
-		$reponse = $bdd->prepare('SELECT * FROM imagebdd WHERE ID = ?');
-		$reponse->execute(array($_GET['img']));
-		$donnees = $reponse->fetch();
-		
-		?> <div id="bloc_page">';
-				<form method="post" action="traitement2.php">
-					<label for="image"> Lien : </label> <textarea name="image" id="image"><?php echo $donnees['Img'] ?></textarea>
+		{	
+			$reponse = $imagedao->Image($_GET['img']);
+
+		?> <div id="bloc_page">'
+				<form method="post" action="traitement2.php?img=<?php echo $_GET['img'] ?>">
+					<label for="image"> Lien : </label> <textarea name="image" id="image" style="width:80%; min-height:200px;"><?php echo $reponse['Img'] ?></textarea>
 					<label for="suppr">Supprimer l'image ? </label> <input type="checkbox" name="suppr" id="suppr" />
-					<input type="submit" value="Validez" />
+					<input type="submit" value="Valider" />
 				</form>
 			</div>
 	</body> <?php
 		} else {
-			/* FAIRE L'INSERTION */
+			?> <div id="bloc_page">
+				<form method="post" action="traitement2.php">
+					<label for="ajout_image"> Lien : </label> <textarea name="ajout_image" id="ajout_image" style="width:80%; min-height:200px;">Lien relatif ou absolu de l'image
+ex : Photos/Nom.jpg
+http://liendel'image.com
+</textarea>
+					<input type="submit" value="Valider" />
+				</form>
+			</div> <?php
 		}
+?>
