@@ -15,7 +15,10 @@ class JourBddDAO {
     }
 
     public function lastWinner( $limit ){
+
+
         $con = $this->factory->getConnexion();
+
         $response = $con->prepare( self::$QUERY_ALL_WINNER );
         $response->bindValue(':limit', (int) trim($limit), PDO::PARAM_INT);
         $response->execute() or die(print_r($response->errorInfo()));
