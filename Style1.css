@@ -1,0 +1,227 @@
+﻿body
+{
+	background: url("fond.jpg");
+	background-repeat:no-repeat;
+	font-family: Arial, serif;
+	color: black;
+	background-color: #292724;
+}
+
+#bloc_page
+{
+	position:relative;
+	width:80%;
+	margin:auto;
+	margin-top:20px;
+	min-width:630px;
+	text-align:center;
+}
+
+.banniere
+{
+	display:block;
+	width:80%;
+	margin: 0 auto;
+	max-height:200px;
+	min-width:630px;
+}
+
+nav
+{
+	width:80%;
+	min-width:630px;
+	margin: 0 auto;
+}
+
+.FilActu
+{
+	min-width:630px;
+}
+
+.Presentation
+{
+	min-width:630px;
+}
+
+.Photos
+{
+	min-width:485px;
+	padding-top:20px;
+}
+
+.Photos, .Presentation, .FilActu, #contact, #Maps, .cadre_journée, .jour2
+{
+	/*Graphisme*/
+	text-align:left;
+    padding: 10px 15px;
+	padding-bottom:5px;
+    margin-bottom: 15px;
+    background-color: #FFF3DF;
+    border: 1px solid #E0D4C0;
+    -webkit-box-shadow: 0 0 10px #E9D8BD inset;
+    -moz-box-shadow: inset 0 1px 1px #E9D8BD;
+    box-shadow: 0 0 10px #443E35 inset;
+    outline: 3px solid rgba(41, 36, 28, 0.31);
+    color: #333333 !important;
+	font-size:1.2em;
+	/*Fin graphisme*/
+}
+
+#Maps
+{
+	display:inline-block;
+	min-width: 378px;
+}
+
+.miniature
+{
+	display: inline-block;
+	width: 250px;
+	height: 200px;
+	margin: 5px;
+}
+
+.miniature:hover
+{
+	border: 2px solid blue;
+}
+
+.lightbox
+{
+	margin-top:15px;
+	text-align:center;
+}
+
+.mois
+{
+	display: inline-block;
+	margin-bottom:15px;
+	background-color: #FFF3DF;
+    border: 2px solid black;
+    color: #333333 !important;
+	-webkit-box-shadow: 0 0 10px #E9D8BD inset;
+    -moz-box-shadow: inset 0 1px 1px #E9D8BD;
+    box-shadow: 0 0 10px #443E35 inset;
+	outline: 3px solid rgba(41, 36, 28, 0.31);
+	width : 16%;
+	vertical-align:top;
+}
+
+.mois p
+{
+	font-size:1.5em;
+}
+
+.semaines
+{
+	display: block;
+	padding: 10px 15px;
+	padding-bottom:5px;
+    color: #333333;
+}
+
+.semaines p
+{
+	font-size:1.2em;
+}
+
+input, textarea
+{
+	display:block;
+	width: 50%;
+	margin: auto;
+}
+
+.cadre_journée
+{
+	text-align:center;
+}
+
+.jour1
+{
+	display:inline-block;
+	width:45%;
+	max-height:250px;
+	margin: 10px;
+	border: 1px solid black;
+	vertical-align:top;
+}
+
+.date1
+{
+	display:block;
+	text-align:center;
+	font-size:1.5em;
+	max-height:50px;
+	overflow:auto;
+	border: 2px solid black;
+	margin-bottom:0px;
+}
+
+.titre1
+{
+	display:block;
+	text-align:center;
+	font-size:1.2em;
+	max-height:50px;
+	overflow:auto;
+	border:1px solid black;
+	margin-bottom:0px;
+}
+
+.img1
+{
+	display:inline-block;
+	float:left;
+	width:30%;
+	max-height: 150px;
+	border: 1px solid black;
+}
+
+.c-descript
+{
+	text-align:justify;
+	max-height:150px;
+	overflow:auto;
+}
+
+.jour2
+{
+	margin-top:20px;
+	min-width:630px;
+	text-align:left;
+}
+
+.entete
+{
+	display:block;
+	position:relative;
+	width:100%;
+	height:200px;
+	top:0px;
+	left:0px;
+	text-align:center;
+	font-size:1.5em;
+}
+
+.img2
+{
+	float: left;
+	width: 20%;
+	height: 200px;
+	margin : 0px;
+	clear: both;
+}
+
+.date2
+{
+	border: 1px solid black;
+	width:80%;
+	position:relative;
+	left:20%;
+}
+
+.page
+{
+	display:block;
+}
