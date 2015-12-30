@@ -12,6 +12,7 @@ class ImageBddDAO {
     private static $INSERT = "INSERT INTO imagebdd(Img) VALUES(:image)";
     private static $DELETE = "DELETE FROM imagebdd WHERE ID = :ID";
     private static $UPDATE = "UPDATE imagebdd SET Img = :image WHERE ID = :ID";
+    private static $QUERY_LAST_IMAGE = "SELECT Img FROM imagebdd ORDER BY ID DESC LIMIT 0, 3";
 
     public function __construct($daoFactory)
     {
@@ -19,8 +20,6 @@ class ImageBddDAO {
     }
 
     public function AllImages(){
-
-
         $con = $this->factory->getConnexion();
 
         $response = $con->query( self::$QUERY_ALL_IMAGE );
@@ -85,6 +84,14 @@ class ImageBddDAO {
         $reponse->execute(array('ID' => $ID,
                                 'image' => $Image));
         //Pareil que Delete/Insert ?
+    }
+
+    public function LastImages () {
+        $con = $this->factory->getConnexion();
+
+        $reponse = $con->query( self::$QUERY_LAST_IMAGE );
+        $array = $reponse->fetch();
+        return $array;
     }
 }
 

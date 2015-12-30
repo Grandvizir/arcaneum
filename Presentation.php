@@ -27,15 +27,30 @@
 			<section class="Presentation">
 				<p>Je balance tout plein de trucs ici pour remplir le bloc, faudra me dire précisement ce que tu veux que j'y mette ;p<br/>
 				L'Arcaneum est un bar gaming qui propose un accès à des pc et des consoles. Venez jouer ou prendre un verre en toute convivialité !<br/>
-				Les visites sont bienvenues, Peut accueillir des groupes, À emporter, Restauration, Service en salle et Terrasse<br/>
+				Les visites sont bienvenues, Peut accueillir des groupes, À emporter, Restauration, Service en salle et Terrasse.<br/>
 				Visa, American Express, Mastercard et Espèces<p>
 			</section>
 			
 			<aside class="FilActu">
 				<?php include("Felicitations.php"); ?>
 			</aside>
-			
-			<?php /*include("Photos.php");*/ ?>
+
+			<section class="Photos_presentation">
+				<?php 
+				$dao = new MySqlDaoFactory();
+				$imagedao = $dao->imageBddDao();
+
+				$array = $imagedao->LastImages();
+				echo '<div class="Photos">';
+				echo '<div class="lightbox">';
+				foreach ($array as $donnees)
+				{
+					echo '<img src="' . $donnees .'" alt="Photo" title="Voir taille originale" class="miniature"/>';
+				}
+				echo '</div>';
+				echo '</div>';
+				?>
+			</section>
 		</div>
 	</body>
 	
@@ -44,16 +59,9 @@
 
 
 <!-- 
-		1/ Admin3.php -> Insertion
-		2/ Traitement2.php -> suppresion modification et ajout
-
-		Modifier la page de prés (3bloc centraux avec les felicitations en tant que fil d'actu)
-			Modifier Felicitation.php pour avoir VRAIMENT les 3 derniere felicitations
-			3-4 dernières photos sur la prés
-				Changer manuellement les images de la pres
-		Panneau d'admin pour la galerie
-			créer le traitement2.php
-			S'occuper de linsertion
+		A retour de traitement2.php, ne pas avoir à retapper le mdp => session/cookies
+		3-4 dernières photos sur la prés // Bug LastImages
+			Changer manuellement les images de la pres
 		Finir les paragraphes présentation/contact
 		Finir les graphismes
 		Finir la page PlanningZoom (problème de graphisme, Pierre ?)

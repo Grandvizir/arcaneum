@@ -17,7 +17,6 @@
 	<body>
 		
 	<?php include("Menu.php");
-
 		require "dao/mysqldao.php";
 
 		$dao = new MySqlDaoFactory();
