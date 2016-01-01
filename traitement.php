@@ -1,12 +1,7 @@
 ﻿<?php
-		try
-			{
-				$bdd = new PDO('mysql:host=localhost;dbname=arcaneum;charset=utf8', 'grandvizir', 'plop', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-			}
-		catch (Exception $e)
-			{
-				die('Erreur : ' . $e->getMessage());
-			}
+		require "dao/mysqldao.php";
+		$dao = new MySqlDaoFactory();
+		$jourdao = $dao->jourBddDao();
 			
 		if ($_GET['jour'] > 318 OR $_GET['jour'] < 1)
 			{
@@ -20,24 +15,9 @@
 		{
 			$finit = 'false';
 		}
+
+		$jourdao->Update( $_POST['date'], $_POST['image'], $_POST['title'], $_POST['C-descript'], $_POST['descript'], $_POST['horaire'],
+						 $_POST['facebook'], $_POST['inscription'], $_POST['vainqueurs'], $finit, $_GET['jour'] );							
 		
-		$reponse = $bdd->prepare('UPDATE jourbdd SET Date=:tempoDate, Img=:tempoImg, Titre=:tempoTitre, Cdescript=:tempoCdescript, descript=:tempodescript,
-		horaire=:tempohoraire, Facebook=:tempoFacebook, Inscription=:tempoInscription, Vainqueur=:tempoVainqueur, Finit=:tempoFinit WHERE ID=:tempojour');
-		$reponse->execute(array(':tempoDate' => $_POST['date'],
-								':tempoImg' => $_POST['image'],
-								':tempoTitre' => $_POST['title'],
-								':tempoCdescript' => $_POST['C-descript'],
-								':tempodescript' => $_POST['descript'],
-								':tempohoraire' => $_POST['horaire'],
-								':tempoFacebook' => $_POST['facebook'],
-								':tempoInscription' => $_POST['inscription'],
-								':tempoVainqueur' => $_POST['vainqueurs'],
-								':tempoFinit' => $finit,
-								':tempojour' => $_GET['jour']
-								));
-								
-		
-		$reponse->closeCursor();
-		
-		header('Location: PlanningZoom.php?jour=' . $_GET['jour'] . '&parameter=users');
+		header('Location: PlanningZoom.php?jour=' . $_GET['jour'] . '&parameter=user');
 ?>

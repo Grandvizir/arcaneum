@@ -5,14 +5,14 @@ require "models/imagebdd.php";
 class ImageBddDAO {
 
     private $factory;
-    private static $QUERY_ALL_IMAGE = "SELECT * FROM imagebdd";
+    private static $QUERY_ALL_IMAGE = "SELECT * FROM imagebdd ORDER BY ID DESC";
     private static $QUERY_MAX = "SELECT MAX(ID) AS id_max FROM imagebdd";
     private static $QUERY_IMAGE = "SELECT * FROM imagebdd WHERE ID = :ID";
     private static $QUERY_VERIF = "SELECT COUNT(ID) AS test FROM imagebdd WHERE ID = :ID";
     private static $INSERT = "INSERT INTO imagebdd(Img) VALUES(:image)";
     private static $DELETE = "DELETE FROM imagebdd WHERE ID = :ID";
     private static $UPDATE = "UPDATE imagebdd SET Img = :image WHERE ID = :ID";
-    private static $QUERY_LAST_IMAGE = "SELECT Img FROM imagebdd ORDER BY ID DESC LIMIT 0, 3";
+    private static $QUERY_LAST_IMAGE = "SELECT Img FROM imagebdd ORDER BY ID DESC LIMIT 4";
 
     public function __construct($daoFactory)
     {
@@ -90,8 +90,7 @@ class ImageBddDAO {
         $con = $this->factory->getConnexion();
 
         $reponse = $con->query( self::$QUERY_LAST_IMAGE );
-        $array = $reponse->fetch();
-        return $array;
+        return $reponse;
     }
 }
 

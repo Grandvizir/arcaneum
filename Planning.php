@@ -23,14 +23,9 @@
 			<div class="cadre_journée">
 			
 <?php 
-		try
-		{
-			$bdd = new PDO('mysql:host=localhost;dbname=arcaneum;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-		}
-		catch (Exception $e)
-		{
-			die('Erreur : ' . $e->getMessage());
-		}
+		require "dao/mysqldao.php";
+		$dao = new MySqlDaoFactory();
+		$jourdao = $dao->jourBddDao();
 		
 		$i = 0;
 		if ($_GET['semaine'] > 312 OR $_GET['semaine'] < 0)
@@ -38,9 +33,8 @@
 			exit('Le paramètre \'semaine\' est incorrect, arrêt du script PHP.');
 		}
 		
-		$reponse = $bdd->prepare('SELECT * FROM jourbdd WHERE ID > ? AND ID < ?+7');
-		$reponse->execute(array($_GET['semaine'], $_GET['semaine']));
-		
+		$reponse = $jourdao->All_week( $_GET['semaine'] );
+
 	while ($i < 6)
 	{
 		$donnees = $reponse->fetch();
@@ -52,10 +46,7 @@
 		echo '</section>';
 		$i++;
 	}
-
-		$reponse->closeCursor();
 ?>
-
 			</div>
 		</div>
 		

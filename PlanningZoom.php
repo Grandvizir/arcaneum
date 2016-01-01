@@ -24,25 +24,17 @@
 	if ($_GET['parameter'] == 'Admin')
 	{
 		header('Location: Admin.php?jour=' . $_GET['jour']);
-		exit();
 	} else {
-		try
-		{
-			$bdd = new PDO('mysql:host=localhost;dbname=arcaneum;charset=utf8', 'grandvizir', 'plop', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-		}
-		catch (Exception $e)
-		{
-			die('Erreur : ' . $e->getMessage());
-		}
+		require "dao/mysqldao.php";
+		$dao = new MySqlDaoFactory();
+		$jourdao = $dao->jourBddDao();
 		
 		if ($_GET['jour'] > 318 OR $_GET['jour'] < 1)
 		{
 			exit('Le paramètre \'jour\' est incorrect, arrêt du script PHP.');
 		}
 		
-		$reponse = $bdd->prepare('SELECT * FROM jourbdd WHERE ID = ?');
-		$reponse->execute(array($_GET['jour']));
-		$donnees = $reponse->fetch();
+		$donnees = $jourdao->All_jour( $_GET['jour'] );
 		
 		if ($donnees['Finit'] == 'false')
 		{
@@ -71,12 +63,9 @@
 			echo '</section>';
 		} else
 		{
-			exit('Erreur sur le paramètre "Vainqueur" de la base de données. Must return a varchar (false or true).');
+			exit('Erreur sur le paramètre "Finit" de la base de données. Must return a varchar (false or true).');
 		}
-
-		$reponse->closeCursor();
 	}
 ?>
-		</div>
-		
+		</div>	
 	</body>

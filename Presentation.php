@@ -39,29 +39,29 @@
 				<?php 
 				$dao = new MySqlDaoFactory();
 				$imagedao = $dao->imageBddDao();
+				$i = 1;
 
-				$array = $imagedao->LastImages();
+				$reponse = $imagedao->LastImages();
 				echo '<div class="Photos">';
 				echo '<div class="lightbox">';
-				foreach ($array as $donnees)
+				while ($array = $reponse->fetch())
 				{
-					echo '<img src="' . $donnees .'" alt="Photo" title="Voir taille originale" class="miniature"/>';
+					echo '<img src="' . $array['Img'] .'" alt="Photo" title="Voir taille originale" class="miniature' . $i . '"/>';
+					$i++;
 				}
 				echo '</div>';
+				echo '<a href="Galerie.php?parameter=user" class="lien_gallerie">Plus de photos dans la gallerie !</p>';
 				echo '</div>';
 				?>
 			</section>
 		</div>
 	</body>
-	
 </html>
 
-
-
 <!-- 
-		A retour de traitement2.php, ne pas avoir à retapper le mdp => session/cookies
-		3-4 dernières photos sur la prés // Bug LastImages
-			Changer manuellement les images de la pres
+		Au retour de traitement2.php, ne pas avoir à retapper le mdp => session/cookies
+		Regroupper le panneau d'admin en un seul
+		Changer manuellement les images de la pres
 		Finir les paragraphes présentation/contact
 		Finir les graphismes
 		Finir la page PlanningZoom (problème de graphisme, Pierre ?)

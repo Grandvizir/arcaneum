@@ -21,7 +21,6 @@
 		if (!isset($_POST['password']) OR $_POST['password'] != "Arcaneum")
 		{
 			 
-			
 			?><div id="bloc_page">';
 				<?php echo '<form method="post" action="Admin.php?jour=' .$_GET['jour'] . '">'; ?>
 					<label for="password"> Password : </label> <input type="password" name="password" id="password" />
@@ -33,23 +32,16 @@
 		else
 		{ 
 	
-			try
-			{
-				$bdd = new PDO('mysql:host=localhost;dbname=arcaneum;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
-			}
-			catch (Exception $e)
-			{
-				die('Erreur : ' . $e->getMessage());
-			}
+			require "dao/mysqldao.php";
+			$dao = new MySqlDaoFactory();
+			$jourdao = $dao->jourBddDao();
 			
 			if ($_GET['jour'] > 318 OR $_GET['jour'] < 1)
 			{
 				exit('Le paramètre \'jour\' est incorrect, arrêt du script PHP.');
 			}
 	
-		$reponse = $bdd->prepare('SELECT * FROM jourbdd WHERE ID = ?');
-		$reponse->execute(array($_GET['jour']));
-		$donnees = $reponse->fetch();?>
+		$donnees = $jourdao->All_jour( $_GET['jour'] ); ?>
 		
 		<div id="bloc_page">
 			<div class="fond">

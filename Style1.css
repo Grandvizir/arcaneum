@@ -73,7 +73,7 @@ nav
 	min-width: 378px;
 }
 
-.miniature
+.miniature, .miniature1
 {
 	display: inline-block;
 	width: 250px;
@@ -81,7 +81,34 @@ nav
 	margin: 5px;
 }
 
-.miniature:hover
+.miniature2
+{
+	display: inline-block;
+	width: 250px;
+	height: 200px;
+	margin: 5px;
+	opacity: 0.8;
+}
+
+.miniature3
+{
+	display: inline-block;
+	width: 250px;
+	height: 200px;
+	margin: 5px;
+	opacity: 0.6;
+}
+
+.miniature4
+{
+	display: inline-block;
+	width: 250px;
+	height: 200px;
+	margin: 5px;
+	opacity: 0.4;
+}
+
+.miniature:hover, .miniature1:hover, .miniature2:hover, .miniature3:hover, .miniature4:hover
 {
 	border: 2px solid blue;
 }
