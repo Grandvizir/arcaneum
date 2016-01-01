@@ -59,14 +59,13 @@
 </html>
 
 <!-- 
-		Au retour de traitement2.php, ne pas avoir à retapper le mdp => session/cookies
 		Regroupper le panneau d'admin en un seul
-		Changer manuellement les images de la pres
+		Changer manuellement les images de la pres -> admin ?
 		Finir les paragraphes présentation/contact
 		Finir les graphismes
 		Finir la page PlanningZoom (problème de graphisme, Pierre ?)
 		Refaire un .CSS propre
 		Enlever Bootstrap ?
 		Adapter aux telephones
-		CHANGER LE MOT DE PASSE
+		CHANGER LE MOT DE PASSE -> admin
 -->

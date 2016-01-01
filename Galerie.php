@@ -19,12 +19,7 @@
 		<script src = "includes/picturebox.js"></script>
 
 	</head>
-	
-		<?php include("Menu.php"); ?>
-			
-		<div id="bloc_page">
 			<?php include("Photos.php");?>
-		</div>
 	</body>
 	
 </html>

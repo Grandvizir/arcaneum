@@ -1,3 +1,10 @@
+<?php session_start(); 
+	if(isset($_POST['password']))
+	{
+		$_SESSION['password'] = $_POST['password'];
+	} 
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,9 +25,8 @@
 		
 		<?php include("Menu.php");
 		
-		if (!isset($_POST['password']) OR $_POST['password'] != "Arcaneum")
+		if (!isset($_SESSION['password']) OR $_SESSION['password'] != "Arcaneum")
 		{
-			 
 			?><div id="bloc_page">';
 				<?php echo '<form method="post" action="Admin.php?jour=' .$_GET['jour'] . '">'; ?>
 					<label for="password"> Password : </label> <input type="password" name="password" id="password" />
@@ -43,8 +49,7 @@
 	
 		$donnees = $jourdao->All_jour( $_GET['jour'] ); ?>
 		
-		<div id="bloc_page">
-			<div class="fond">
+		<div id="bloc_page" class="cadre">
 				<form method="post" action="traitement.php?jour=<?php echo $_GET['jour'] ?>">
 					<label for="date">Date : </label> <input type="text" name="date" value="<?php echo $donnees['Date'] ?>"/>
 					<label for="title">Titre : </label> <input type="text" name="title" id="title" value="<?php echo $donnees['Titre'] ?>"/>
@@ -58,7 +63,6 @@
 					<label for="vainqueurs">Vainqueurs : </label> <textarea name="vainqueurs" id="vainqueurs"><?php echo $donnees['Vainqueur'] ?></textarea>
 					<label for="valider">Validez : </label> <input type="submit" name="valider" id="valider" value="Envoyez !"/>
 				</form>
-			</div>
 		</div>
 		<?php } ?>
 		

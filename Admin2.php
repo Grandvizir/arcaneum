@@ -1,3 +1,10 @@
+<?php session_start(); 
+	if(isset($_POST['password']))
+	{
+		$_SESSION['password'] = $_POST['password'];
+	} 
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,42 +22,41 @@
 		<![endif]-->
 	</head>
 	<body>
-			<?php if (!isset($_POST['password']) OR $_POST['password'] != "Arcaneum")
+			<?php
+			if (!isset($_SESSION['password']) OR $_SESSION['password'] != "Arcaneum")
 			{
-				 
-				
-				?><div id="bloc_page">
-					<form method="post" action="Admin2.php">
-						<label for="password"> Password : </label> <input type="password" name="password" id="password" />
-						<input type="submit" value="validez" />
-					</form>
-				</div>
+				include("Menu.php"); ?>
+					<div id="bloc_page" class="cadre">
+						<form method="post" action="Admin2.php">
+							<label for="password"> Password : </label> <input type="password" name="password" id="password" />
+							<input type="submit" value="validez" />
+						</form>
+					</div>
 				<?php
-			}
-			else
+			} else
 			{
 				require "dao/mysqldao.php";
 
 				$dao = new MySqlDaoFactory();
 				$imagedao = $dao->imageBddDao();
 				$max = $imagedao->MaxID();
-				
-				include('menu.php');
 
 				$max = $max+1;
 
+				include('menu.php');
+
 				$reponse = $imagedao->AllImages();
-				echo '<div id="bloc_page">';
-				echo '<div class="Photos">';
+				?>	<div id="bloc_page">
+						<div class="Photos"><?php
 				foreach ($reponse as $donnees)
 				{
 					echo '<a href="Admin3.php?img=' . $donnees->getID() . '" >
 						<img src="' . $donnees->getImage() . '" alt="Photo" title="Modifier" class="miniature"/></a>';
-				}
-					echo '<a href="Admin3.php?img=' . $max . '" >  Insérer une nouvelle image ? </a>';
-				echo '</div>';
-				echo '</div>';
-							
+				} ?>
+					<a href="Admin3.php?img=' . $max . '" >  Insérer une nouvelle image ? </a>
+						</div>
+					</div> <?php			
 			}
 		?>
-</body>
+	</body>
+</html>
