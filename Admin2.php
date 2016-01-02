@@ -1,8 +1,15 @@
 <?php session_start(); 
-	if(isset($_POST['password']))
+	if (isset($_SESSION['user']))
 	{
-		$_SESSION['password'] = $_POST['password'];
-	} 
+		require "dao/mysqldao.php";
+		$dao = new MySqlDaoFactory();
+		$admindao = $dao->adminBddDao();
+		$test_name = $admindao->Verif_ID( $_SESSION['user'] );
+	}
+	if (isset($_SESSION['password']))
+	{
+		$test_mdp = $admindao->Verif_mdp( $_SESSION['user'] );
+	}
 ?>
 
 <!DOCTYPE html>
@@ -23,27 +30,21 @@
 	</head>
 	<body>
 			<?php
-			if (!isset($_SESSION['password']) OR $_SESSION['password'] != "Arcaneum")
+			if (!isset($_SESSION['password']) OR !isset($_SESSION['user']))
 			{
-				include("Menu.php"); ?>
-					<div id="bloc_page" class="cadre">
-						<form method="post" action="Admin2.php">
-							<label for="password"> Password : </label> <input type="password" name="password" id="password" />
-							<input type="submit" value="validez" />
-						</form>
-					</div>
-				<?php
-			} else
-			{
-				require "dao/mysqldao.php";
+				exit('Compte non identifier ou session expirée. Veuillez vous reconnecter en passant par "Admin.php".');
+			}
 
+			include('Menu_admin.php');
+
+			if ($test_name != 1 AND $test_mdp != md5($_SESSION['password']))
+			{
+				exit('Session incorrect. Veuillez vous reconnecter en passant par "Admin.php".');
+			} else {
 				$dao = new MySqlDaoFactory();
 				$imagedao = $dao->imageBddDao();
 				$max = $imagedao->MaxID();
-
 				$max = $max+1;
-
-				include('menu.php');
 
 				$reponse = $imagedao->AllImages();
 				?>	<div id="bloc_page">

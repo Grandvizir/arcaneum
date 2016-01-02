@@ -19,5 +19,5 @@
 		$jourdao->Update( $_POST['date'], $_POST['image'], $_POST['title'], $_POST['C-descript'], $_POST['descript'], $_POST['horaire'],
 						 $_POST['facebook'], $_POST['inscription'], $_POST['vainqueurs'], $finit, $_GET['jour'] );							
 		
-		header('Location: PlanningZoom.php?jour=' . $_GET['jour'] . '&parameter=user');
+		header('Location: Tournois_admin.php');
 ?>

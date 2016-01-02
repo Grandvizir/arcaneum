@@ -2,7 +2,7 @@
 
 require "jourbdddao.php";
 require "imagebdddao.php";
-
+require "adminbdddao.php";
 
 class MySqlDaoFactory
 {
@@ -35,6 +35,10 @@ class MySqlDaoFactory
 
     public function imageBddDao ( ) {
         return new ImageBddDao( $this );
+    }
+
+    public function adminbdddao ( ) {
+        return new AdminBddDAO( $this );
     }
 }
 

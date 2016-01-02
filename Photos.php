@@ -1,9 +1,4 @@
 <?php 
-	if ($_GET['parameter'] == 'Admin')
-	{
-		include('Admin2.php');
-	} else {
-
 		require 'dao/mysqldao.php';
 
 		$dao = new MySqlDaoFactory();
@@ -20,7 +15,6 @@
 		{
 			echo '<img src="' . $link->getImage() . '" alt="Photo" title="Voir taille originale" class="miniature"/>';
 		}
-	}
 ?>
 		</div>
 	</section>

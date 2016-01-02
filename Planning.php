@@ -21,8 +21,7 @@
 		
 		<div id="bloc_page">
 			<div class="cadre_journée">
-			
-<?php 
+	<?php 
 		require "dao/mysqldao.php";
 		$dao = new MySqlDaoFactory();
 		$jourdao = $dao->jourBddDao();
@@ -39,7 +38,7 @@
 	{
 		$donnees = $reponse->fetch();
 		echo '<section class="jour1">';
-		echo '<a href="PlanningZoom.php?jour=' . $donnees['ID'] . '&parameter=user" class="date1">' . $donnees['Date'] . '</a>';
+		echo '<a href="PlanningZoom.php?jour=' . $donnees['ID'] . '" class="date1">' . $donnees['Date'] . '</a>';
 		echo '<p class="titre1">' . $donnees['Titre'] . '</p>';
 		echo '<img class="img1" src="' . $donnees['Img'] . '" alt="Photo de l\'évènement"/>';
 		echo '<p class="c-descript">' . $donnees['Cdescript'] . '</p>';

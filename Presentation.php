@@ -59,8 +59,9 @@
 </html>
 
 <!-- 
-		Regroupper le panneau d'admin en un seul
-		Changer manuellement les images de la pres -> admin ?
+		Afficher certains événement sur la page de prés
+		Possibilité de rajouter des compte
+		Changer manuellement les images de la pres
 		Finir les paragraphes présentation/contact
 		Finir les graphismes
 		Finir la page PlanningZoom (problème de graphisme, Pierre ?)
@@ -68,4 +69,5 @@
 		Enlever Bootstrap ?
 		Adapter aux telephones
 		CHANGER LE MOT DE PASSE -> admin
+		Commenter le code
 -->

@@ -1,8 +1,24 @@
-<?php session_start(); 
+<?php
+session_start();
 	if(isset($_POST['password']))
 	{
 		$_SESSION['password'] = $_POST['password'];
-	} 
+	}
+	if(isset($_POST['user']))
+	{
+		$_SESSION['user'] = $_POST['user'];
+	}
+	if (isset($_SESSION['user']))
+	{
+		require "dao/mysqldao.php";
+		$dao = new MySqlDaoFactory();
+		$admindao = $dao->adminBddDao();
+		$test_name = $admindao->Verif_ID( $_SESSION['user'] );
+	}
+	if (isset($_SESSION['password']))
+	{
+		$test_mdp = $admindao->Verif_mdp( $_SESSION['user'] );
+	}
 ?>
 
 <!DOCTYPE html>
@@ -23,12 +39,35 @@
 	</head>
 	<body>
 		
-		<?php include("Menu.php");
+		<?php include("Menu_admin.php");
 		
-		if (!isset($_SESSION['password']) OR $_SESSION['password'] != "Arcaneum")
+		if (!isset($_SESSION['password']) OR (!isset($_SESSION['user'])))
 		{
-			?><div id="bloc_page">';
-				<?php echo '<form method="post" action="Admin.php?jour=' .$_GET['jour'] . '">'; ?>
+			?><div id="bloc_page">
+				<form method="post" action="Admin.php">
+					<label for="user">Username : </label> <input type="text" name="user" id="user" /> <br />
+					<label for="password"> Password : </label> <input type="password" name="password" id="password" />
+					<input type="submit" value="validez" />
+				</form>
+			</div>
+			<?php
+		} else if ( $test_name != 1 )
+		{
+			echo "Nom d'utilisateur incorrect.";
+			?><div id="bloc_page">
+				<form method="post" action="Admin.php">
+					<label for="user">Username : </label> <input type="text" name="user" id="user" />
+					<label for="password"> Password : </label> <input type="password" name="password" id="password" />
+					<input type="submit" value="validez" />
+				</form>
+			</div>
+			<?php
+		} else if ( $test_mdp != md5($_SESSION['password']) )
+		{
+			echo "Mot de passe incorrect.";
+			?><div id="bloc_page">
+				<form method="post" action="Admin.php">
+					<label for="user">Username : </label> <input type="text" name="user" id="user" />
 					<label for="password"> Password : </label> <input type="password" name="password" id="password" />
 					<input type="submit" value="validez" />
 				</form>
@@ -36,34 +75,8 @@
 			<?php
 		}
 		else
-		{ 
-	
-			require "dao/mysqldao.php";
-			$dao = new MySqlDaoFactory();
-			$jourdao = $dao->jourBddDao();
-			
-			if ($_GET['jour'] > 318 OR $_GET['jour'] < 1)
-			{
-				exit('Le paramètre \'jour\' est incorrect, arrêt du script PHP.');
-			}
-	
-		$donnees = $jourdao->All_jour( $_GET['jour'] ); ?>
-		
-		<div id="bloc_page" class="cadre">
-				<form method="post" action="traitement.php?jour=<?php echo $_GET['jour'] ?>">
-					<label for="date">Date : </label> <input type="text" name="date" value="<?php echo $donnees['Date'] ?>"/>
-					<label for="title">Titre : </label> <input type="text" name="title" id="title" value="<?php echo $donnees['Titre'] ?>"/>
-					<label for="image">Image : </label> <input type="text" name="image" id="image" value="<?php echo $donnees['Img'] ?>"/>
-					<label for="C-descript">Déscription courte : </label> <textarea name="C-descript" id="C-descript" > <?php echo $donnees['Cdescript'] ?> </textarea>
-					<label for="descript">Déscription détaillé : </label> <textarea name="descript" id="descript" > <?php echo $donnees['descript'] ?> </textarea>
-					<label for="horaire">Horaires : </label> <input type="text" name="horaire" id="horaire" value="<?php echo $donnees['horaire'] ?>"/>
-					<label for="facebook">Lien Facebook : </label> <input type="text" name="facebook" id="facebook" value="<?php echo $donnees['Facebook'] ?>"/>
-					<label for="inscription">Lien module d'inscription : </label> <input type="text" name="inscription" id="inscription" value="<?php echo $donnees['Inscription'] ?>"/>
-					<label for="finit">Finit ? : </label> <input type="checkbox" name="finit" id="finit" <?php if ($donnees['Finit'] == 'true'){echo 'checked';} ?>/>
-					<label for="vainqueurs">Vainqueurs : </label> <textarea name="vainqueurs" id="vainqueurs"><?php echo $donnees['Vainqueur'] ?></textarea>
-					<label for="valider">Validez : </label> <input type="submit" name="valider" id="valider" value="Envoyez !"/>
-				</form>
-		</div>
-		<?php } ?>
-		
+		{	
+			echo "Identification réussit. Accèdez aux panneaux d'administrations via le menu.";
+		} ?>		
 	</body>
+</html>

@@ -1,3 +1,17 @@
+<?php session_start(); 
+	if (isset($_SESSION['user']))
+	{
+		require "dao/mysqldao.php";
+		$dao = new MySqlDaoFactory();
+		$admindao = $dao->adminBddDao();
+		$test_name = $admindao->Verif_ID( $_SESSION['user'] );
+	}
+	if (isset($_SESSION['password']))
+	{
+		$test_mdp = $admindao->Verif_mdp( $_SESSION['user'] );
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,10 +29,17 @@
 		<![endif]-->
 	</head>
 	<body>
-		
-	<?php include("Menu.php");
-		require "dao/mysqldao.php";
+	<?php if (!isset($_SESSION['password']) OR !isset($_SESSION['user']))
+			{
+				exit('Compte non identifier ou session expirée. Veuillez vous reconnecter en passant par "Admin.php".');
+			}
 
+	include("Menu_admin.php");
+
+	if ($test_name != 1 AND $test_mdp != md5($_SESSION['password']))
+		{
+			exit('Session incorrect. Veuillez vous reconnecter en passant par "Admin.php".');
+		} else {
 		$dao = new MySqlDaoFactory();
 		$imagedao = $dao->imageBddDao();
 
@@ -35,7 +56,8 @@
 					<input type="submit" value="Valider" />
 				</form>
 			</div>
-	</body> <?php
+	</body> 
+</html><?php
 		} else {
 			?> <div id="bloc_page">
 				<form method="post" action="traitement2.php">
@@ -45,6 +67,9 @@ http://liendel'image.com
 </textarea>
 					<input type="submit" value="Valider" />
 				</form>
-			</div> <?php
+			</div> 
+		</body>
+	</html><?php
 		}
+	}
 ?>

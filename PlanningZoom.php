@@ -21,10 +21,6 @@
 		
 		<div id="bloc_page">			
 <?php 
-	if ($_GET['parameter'] == 'Admin')
-	{
-		header('Location: Admin.php?jour=' . $_GET['jour']);
-	} else {
 		require "dao/mysqldao.php";
 		$dao = new MySqlDaoFactory();
 		$jourdao = $dao->jourBddDao();
@@ -65,7 +61,6 @@
 		{
 			exit('Erreur sur le paramètre "Finit" de la base de données. Must return a varchar (false or true).');
 		}
-	}
 ?>
 		</div>	
 	</body>
