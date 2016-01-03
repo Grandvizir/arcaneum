@@ -5,7 +5,7 @@ require "dao/mysqldao.php";
 
 $dao = new MySqlDaoFactory();
 $jourdao = $dao->jourBddDao();
-$winners = $jourdao->lastWinner( 3 );
+$winners = $jourdao->lastWinner( 6 );
 
 foreach ($winners as $joubdd){
     echo $joubdd->getDate().'<br/>';

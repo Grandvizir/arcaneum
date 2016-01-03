@@ -35,6 +35,7 @@
 			}
 
 	include("Menu_admin.php");
+	echo '<div id="bloc_page" class="cadre">';
 
 	if ($test_name != 1 AND $test_mdp != md5($_SESSION['password']))
 		{
@@ -49,13 +50,14 @@
 		{	
 			$reponse = $imagedao->Image($_GET['img']);
 
-		?> <div id="bloc_page">'
+		?> <div id="bloc_page">
 				<form method="post" action="traitement2.php?img=<?php echo $_GET['img'] ?>">
 					<label for="image"> Lien : </label> <textarea name="image" id="image" style="width:80%; min-height:200px;"><?php echo $reponse['Img'] ?></textarea>
 					<label for="suppr">Supprimer l'image ? </label> <input type="checkbox" name="suppr" id="suppr" />
 					<input type="submit" value="Valider" />
 				</form>
 			</div>
+		</div>
 	</body> 
 </html><?php
 		} else {
@@ -67,6 +69,7 @@ http://liendel'image.com
 </textarea>
 					<input type="submit" value="Valider" />
 				</form>
+			</div>
 			</div> 
 		</body>
 	</html><?php

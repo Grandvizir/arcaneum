@@ -50,7 +50,7 @@
 					$i++;
 				}
 				echo '</div>';
-				echo '<a href="Galerie.php?parameter=user" class="lien_gallerie">Plus de photos dans la gallerie !</p>';
+				echo '<a href="Galerie.php" class="lien_gallerie">Plus de photos dans la gallerie !</a>';
 				echo '</div>';
 				?>
 			</section>
@@ -60,7 +60,6 @@
 
 <!-- 
 		Afficher certains événement sur la page de prés
-		Possibilité de rajouter des compte
 		Changer manuellement les images de la pres
 		Finir les paragraphes présentation/contact
 		Finir les graphismes
@@ -68,6 +67,5 @@
 		Refaire un .CSS propre
 		Enlever Bootstrap ?
 		Adapter aux telephones
-		CHANGER LE MOT DE PASSE -> admin
 		Commenter le code
 -->

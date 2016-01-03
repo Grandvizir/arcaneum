@@ -67,6 +67,11 @@ nav
 	/*Fin graphisme*/
 }
 
+.cadre
+{
+	text-align:center;
+}
+
 #Maps
 {
 	display:inline-block;
@@ -251,4 +256,17 @@ input, textarea
 .page
 {
 	display:block;
+}
+
+.text
+{
+	font-size:1.3em;
+	text-align:center;
+}
+
+.text_important
+{
+	font-size:2em;
+	text-align:center;
+	color:red !important;
 }

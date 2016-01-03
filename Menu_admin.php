@@ -7,6 +7,7 @@
 		<a class="btn btn-primary btn-sm" href="#" style="font-size: 1.3em;">Présentation</a>
 		<a class="btn btn-primary btn-sm" href="Tournois_admin.php" style="font-size: 1.3em;">Événements</a>
 		<a class="btn btn-primary btn-sm" href="Admin2.php" style="font-size: 1.3em;">Galerie</a>
-		<a class="btn btn-primary btn-sm" href="#" style="font-size: 1.3em;">Admin</a>
+		<a class="btn btn-primary btn-sm" href="Admin4.php" style="font-size: 1.3em;">Admin</a>
+		<a class="btn btn-primary btn-sm" href="Admin.php" style="font-size: 1.3em;">Déconnexion</a>
 	</div>
 </nav>

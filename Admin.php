@@ -40,7 +40,9 @@ session_start();
 	<body>
 		
 		<?php include("Menu_admin.php");
-		
+
+		echo '<div id="bloc_page" class="cadre">';
+
 		if (!isset($_SESSION['password']) OR (!isset($_SESSION['user'])))
 		{
 			?><div id="bloc_page">
@@ -75,8 +77,10 @@ session_start();
 			<?php
 		}
 		else
-		{	
-			echo "Identification réussit. Accèdez aux panneaux d'administrations via le menu.";
-		} ?>		
+		{?>
+			<p class="text">Identification réussit. Accèdez aux panneaux d'administrations via le menu.</p>
+			<a class="text" href="Deco.php" alt="Se déconnecter">Se déconnecter ?</a> <?php
+		} ?>	
+		</div>	
 	</body>
 </html>
